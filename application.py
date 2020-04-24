@@ -26,7 +26,7 @@ def book():
         return render_template("error.html", message="Invalid flight number.")
         
     #Make sure the flight exists.
-    if db.executes("SELECT * FROM flights WHERE id = :id", {"id":flight_id}).rowcount == 0:
+    if db.execute("SELECT * FROM flights WHERE id = :id", {"id":flight_id}).rowcount == 0:
         return render_template("error.html", message="No such flight with that id.")
     db.execute("INSERT INTO passengers (name, flight_id) VALUES (:name, :flight_id)", 
                 {"name":name, "flight_id": flight_id})
